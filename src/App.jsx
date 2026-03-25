@@ -349,7 +349,17 @@ const ProForma = ({contract, onUpdate, onClose}) => {
   );
 };
 
-export default function App() {
+export default function AppWrapper() {
+  const [authed, setAuthed] = useState(false);
+
+  if (!authed) {
+    return <Login onLogin={() => setAuthed(true)} />;
+  }
+
+  return <App />;
+}
+
+function App() {
   const [contracts, setContracts] = useState([]);
   const [selected, setSelected] = useState(null);
   const [showCSV, setShowCSV] = useState(false);
